@@ -62,6 +62,7 @@ INSERT INTO Teachers(id, speciality) VALUES (6, 'History');
 ````
 SELECT People.id, People.name, People.age, People.address, Students.enrolment FROM People INNER JOIN Students ON People.id = Students.id;
 ````
+
 ### Result 
 
 ````
@@ -90,6 +91,7 @@ SELECT People.id, People.name, People.age, People.address, Teachers.speciality F
   6 | Abel Munt  |  30 | Calle Rojo 5        | History
 (3 rows)
 ````
+
 * SQL query that returns the names of the persons in both tables "Students" and "Teachers".
 
 ````
