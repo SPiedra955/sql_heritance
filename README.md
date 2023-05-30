@@ -63,7 +63,7 @@ INSERT INTO Teachers(id, speciality) VALUES (6, 'History');
 SELECT People.id, People.name, People.age, People.address, Students.enrolment FROM People INNER JOIN Students ON People.id = Students.id;
 ````
 
-### Result 
+#### Result 
 
 ````
  id |     name     | age |       address       | enrolment
@@ -81,7 +81,7 @@ SELECT People.id, People.name, People.age, People.address, Students.enrolment FR
 SELECT People.id, People.name, People.age, People.address, Teachers.speciality FROM People INNER JOIN Teachers ON People.id = Teachers.id;
 ````
 
-### Result
+#### Result
 
 ````
  id |    name    | age |       address       |   speciality
@@ -100,7 +100,7 @@ INNER JOIN Students ON People.id = Students.id
 INNER JOIN Teachers ON People.id = Teachers.id;
 ````
 
-### Result
+#### Result
 
 ````
  id |    name    | age |       address       | id | enrolment | id |   speciality
