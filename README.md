@@ -95,16 +95,17 @@ SELECT People.id, People.name, People.age, People.address, Teachers.speciality F
 * SQL query that returns the names of the persons in both tables "Students" and "Teachers".
 
 ````
-SELECT * FROM People 
-INNER JOIN Students ON People.id = Students.id 
+SELECT People.id, People.name, People.address, Students.enrolment, Teachers.speciality 
+FROM People
+INNER JOIN Students ON People.id = Students.id
 INNER JOIN Teachers ON People.id = Teachers.id;
 ````
 
 #### Result
 
 ````
- id |    name    | age |       address       | id | enrolment | id |   speciality
-----+------------+-----+---------------------+----+-----------+----+----------------
-  1 | Juan Pérez |  25 | Calle Principal 123 |  1 | 20210001  |  1 | Administration
+ id |    name    |       address       | enrolment |   speciality
+----+------------+---------------------+-----------+----------------
+  1 | Juan Pérez | Calle Principal 123 | 20210001  | Administration
 (1 row)
 ````
