@@ -12,24 +12,33 @@ Suppose you want to model a database of people with different roles, such as stu
 Here is the database script using inheritance:
 
 ````
-CREATE TABLE People (
-  id INT PRIMARY KEY,
-  name VARCHAR(100),
-  age INT,
-  address VARCHAR(255)
+CREATE DATABASE inheritance;
+
+-- Create the table for people
+CREATE TABLE people (
+  person_id SERIAL PRIMARY KEY,
+  name VARCHAR(50),
+  age INTEGER
 );
 
-CREATE TABLE Students (
-  id INT PRIMARY KEY,
-  enrolment VARCHAR(10),
-  FOREIGN KEY (id) REFERENCES People (id)
+-- Create the table for students, inheriting from people
+CREATE TABLE students (
+  student_id SERIAL PRIMARY KEY,
+  course VARCHAR(50),
+  FOREIGN KEY (student_id) REFERENCES people (person_id)
+) INHERITS (people);
 
-CREATE TABLE Teachers (
-  id INT PRIMARY KEY,
-  especiality VARCHAR(50),
-  FOREIGN KEY (id) REFERENCES People(id)
-);
+-- Create the table for teachers, inheriting from people
+CREATE TABLE teachers (
+  teacher_id SERIAL PRIMARY KEY,
+  department VARCHAR(50),
+  FOREIGN KEY (teacher_id) REFERENCES people (person_id)
+) INHERITS (people);
+dasdsafsdfnsd
+
+
 ````
+
 In this example, the table "Persons" is the main table containing the properties common to all persons, such as ID, name, age and address. Then, two additional tables are created: ````"Students"```` and ````"Teachers"````. These tables inherit the column "id" from the main table using a FOREIGN KEY.
 
 The ````"Students"```` table has additional properties such as "enrolment", while the ````"Teachers"```` table has an additional property called "speciality". By using inheritance, you can store data specific to each type of person in separate tables, but maintain an inheritance relationship between them using the "id" column that refers to the main table.
@@ -37,75 +46,71 @@ The ````"Students"```` table has additional properties such as "enrolment", whil
 ### Data insertion 
 
 ````
--- Table People 
-INSERT INTO People (id, name, age, address) VALUES (1, 'Juan Pérez', 25, 'Calle Principal 123');
-INSERT INTO People (id, name, age, address) VALUES (2, 'Andrés Parra', 22, 'Calle London 18');
-INSERT INTO People (id, name, age, address) VALUES (3, 'Ana Lopéz', 20, 'Calle Guillem III');
-INSERT INTO People (id, name, age, address) VALUES (4, 'José Manuel', 20, 'Calle Colom II');
-INSERT INTO People (id, name, age, address) VALUES (5, 'Pep Font', 40, 'Calle Piu 9');
-INSERT INTO People (id, name, age, address) VALUES (6, 'Abel Munt', 30, 'Calle Rojo 5');
+-- Insert data into the people table 
+INSERT INTO people (name, age) VALUES ('John Drink', 25);
 
--- Table Students
-INSERT INTO Students (id, enrolment) VALUES (1, '20210001');
-INSERT INTO Students (id, enrolment) VALUES (2, '21217981');
-INSERT INTO Students (id, enrolment) VALUES (3, '20125481');
-INSERT INTO Students (id, enrolment) VALUES (4, '23817471');
+-- Insert data into the students table
+INSERT INTO students (major) VALUES ('Computer Science');
 
--- Table Teachers
-INSERT INTO Teachers(id, speciality) VALUES (5, 'Mathematics');
-INSERT INTO Teachers(id, speciality) VALUES (6, 'History');
+-- Insert data into the teachers table
+INSERT INTO teachers (department) VALUES ('Mathematics');
 ````
+
 ### Querys
 
-* Obtain all students with their personal information:
+* Retrieving data:
 
 ````
-SELECT People.id, People.name, People.age, People.address, Students.enrolment FROM People INNER JOIN Students ON People.id = Students.id;
-````
-
-#### Result 
-
-````
- id |     name     | age |       address       | enrolment
-----+--------------+-----+---------------------+-----------
-  1 | Juan Pérez   |  25 | Calle Principal 123 | 20210001
-  2 | Andrés Parra |  22 | Calle London 18     | 21217981
-  3 | Ana Lopéz    |  20 | Calle Guillem III   | 20125481
-  4 | José Manuel  |  20 | Calle Colom II      | 23817471
-(4 rows)
-````
-
-* Get all teachers with their personal information:
-
-````
-SELECT People.id, People.name, People.age, People.address, Teachers.speciality FROM People INNER JOIN Teachers ON People.id = Teachers.id;
-````
-
-#### Result
-
-````
- id |    name    | age |       address       |   speciality
-----+------------+-----+---------------------+----------------
-  1 | Juan Pérez |  25 | Calle Principal 123 | Administration
-  5 | Pep Font   |  40 | Calle Piu 9         | Mathematics
-  6 | Abel Munt  |  30 | Calle Rojo 5        | History
+select * from people;
+ person_id |   name   | age
+-----------+----------+-----
+         1 | John Doe |  25
+         2 |          |
+         3 |          |
 (3 rows)
+
+select * from students;
+ person_id | name | age | student_id |      major
+-----------+------+-----+------------+------------------
+         2 |      |     |          1 | Computer Science
+(1 row)
+
+select * from teachers;
+ person_id | name | age | teacher_id | department
+-----------+------+-----+------------+-------------
+         3 |      |     |          1 | Mathematics
+(1 row)
+
 ````
 
-* SQL query that returns the names of the persons in both tables "Students" and "Teachers".
+* Manipulating data:
 
 ````
-SELECT People.id, People.name, People.address, Students.enrolment, Teachers.speciality 
-FROM People
-INNER JOIN Students ON People.id = Students.id
-INNER JOIN Teachers ON People.id = Teachers.id;
-````
+ UPDATE people SET name = 'Michael Owen', age = 35 WHERE person_id = 2;
+ UPDATE people SET name = 'Connor Al-Hain', age = 45 WHERE person_id = 3;
+ ````
 
-#### Result
+* As a result the child table inherits the data from the parent.
 
 ````
- id |    name    |       address       | enrolment |   speciality
-----+------------+---------------------+-----------+----------------
-  1 | Juan Pérez | Calle Principal 123 | 20210001  | Administration
+select * from people;
+ person_id |      name      | age
+-----------+----------------+-----
+         1 | John Doe       |  25
+         2 | Michael Owen   |  35
+         3 | Connor Al-Hain |  45
+(3 rows)
+
+select * from students;
+ person_id |     name     | age | student_id |      major
+-----------+--------------+-----+------------+------------------
+         2 | Michael Owen |  35 |          1 | Computer Science
+(1 row)
+
+select * from teachers;
+ person_id |      name      | age | teacher_id | department
+-----------+----------------+-----+------------+-------------
+         3 | Connor Al-Hain |  45 |          1 | Mathematics
 (1 row)
 ````
+
