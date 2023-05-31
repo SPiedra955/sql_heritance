@@ -1,3 +1,12 @@
+# Table of contents
+ * [**SQL inheritance**](#sql-inheritance)
+    * [**Inheritance**](#inheritance)
+ * [**Activity**](#activity)
+    * [**Data insertion**](#data-insertion)
+    * [**Querys**](#querys)
+ * [**Review**](#review)
+
+
 # SQL inheritance
 ### Inheritance
 
@@ -34,8 +43,6 @@ CREATE TABLE teachers (
   department VARCHAR(50),
   FOREIGN KEY (teacher_id) REFERENCES people (person_id)
 ) INHERITS (people);
-dasdsafsdfnsd
-
 
 ````
 
