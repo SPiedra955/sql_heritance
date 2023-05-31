@@ -120,4 +120,4 @@ select * from teachers;
          3 | Connor Al-Hain |  45 |          1 | Mathematics
 (1 row)
 ````
-
+# Review
