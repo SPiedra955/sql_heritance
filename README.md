@@ -4,8 +4,6 @@
  * [**Activity**](#activity)
     * [**Data insertion**](#data-insertion)
     * [**Querys**](#querys)
- * [**Review**](#review)
-
 
 # SQL inheritance
 ### Inheritance
@@ -57,7 +55,7 @@ The ````"Students"```` table has additional properties such as "enrolment", whil
 INSERT INTO people (name, age) VALUES ('John Drink', 25);
 
 -- Insert data into the students table
-INSERT INTO students (major) VALUES ('Computer Science');
+INSERT INTO students (course) VALUES ('Computer Science');
 
 -- Insert data into the teachers table
 INSERT INTO teachers (department) VALUES ('Mathematics');
@@ -77,7 +75,7 @@ select * from people;
 (3 rows)
 
 select * from students;
- person_id | name | age | student_id |      major
+ person_id | name | age | student_id |      course
 -----------+------+-----+------------+------------------
          2 |      |     |          1 | Computer Science
 (1 row)
@@ -109,7 +107,7 @@ select * from people;
 (3 rows)
 
 select * from students;
- person_id |     name     | age | student_id |      major
+ person_id |     name     | age | student_id |      course
 -----------+--------------+-----+------------+------------------
          2 | Michael Owen |  35 |          1 | Computer Science
 (1 row)
@@ -120,4 +118,3 @@ select * from teachers;
          3 | Connor Al-Hain |  45 |          1 | Mathematics
 (1 row)
 ````
-# Review
