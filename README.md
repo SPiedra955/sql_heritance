@@ -22,21 +22,21 @@ Here is the database script using inheritance:
 CREATE DATABASE inheritance;
 
 -- Create the table for people
-CREATE TABLE people (
+CREATE TABLE People (
   person_id SERIAL PRIMARY KEY,
   name VARCHAR(50),
   age INTEGER
 );
 
 -- Create the table for students
-CREATE TABLE students (
+CREATE TABLE Students (
   student_id SERIAL PRIMARY KEY,
   course VARCHAR(50),
   FOREIGN KEY (student_id) REFERENCES people (person_id)
 ) INHERITS (people);
 
 -- Create the table for teachers
-CREATE TABLE teachers (
+CREATE TABLE Teachers (
   teacher_id SERIAL PRIMARY KEY,
   department VARCHAR(50),
   FOREIGN KEY (teacher_id) REFERENCES people (person_id)
@@ -44,7 +44,7 @@ CREATE TABLE teachers (
 
 ````
 
-In this example, the table "People" is the main table containing the properties common to all persons, such as ID, name, age and address. Then, two additional tables are created: ````"Students"```` and ````"Teachers"````. These tables inherit the column "id" from the main table using a FOREIGN KEY.
+In this example, the table "People" is the main table containing the properties common to all persons, such as person_id, name and age. Then, two additional tables are created: ````"Students"```` and ````"Teachers"````. These tables inherit the column "person_id" from the main table(People) using a FOREIGN KEY.
 
 The ````"Students"```` table has additional properties such as "course", while the ````"Teachers"```` table has an additional property called "department". By using inheritance, you can store data specific to each type of person in separate tables, but maintain an inheritance relationship between them using the "id" column that refers to the main table.
 
