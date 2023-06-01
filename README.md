@@ -28,14 +28,14 @@ CREATE TABLE people (
   age INTEGER
 );
 
--- Create the table for students, inheriting from people
+-- Create the table for students
 CREATE TABLE students (
   student_id SERIAL PRIMARY KEY,
   course VARCHAR(50),
   FOREIGN KEY (student_id) REFERENCES people (person_id)
 ) INHERITS (people);
 
--- Create the table for teachers, inheriting from people
+-- Create the table for teachers
 CREATE TABLE teachers (
   teacher_id SERIAL PRIMARY KEY,
   department VARCHAR(50),
@@ -44,9 +44,9 @@ CREATE TABLE teachers (
 
 ````
 
-In this example, the table "Persons" is the main table containing the properties common to all persons, such as ID, name, age and address. Then, two additional tables are created: ````"Students"```` and ````"Teachers"````. These tables inherit the column "id" from the main table using a FOREIGN KEY.
+In this example, the table "People" is the main table containing the properties common to all persons, such as ID, name, age and address. Then, two additional tables are created: ````"Students"```` and ````"Teachers"````. These tables inherit the column "id" from the main table using a FOREIGN KEY.
 
-The ````"Students"```` table has additional properties such as "enrolment", while the ````"Teachers"```` table has an additional property called "speciality". By using inheritance, you can store data specific to each type of person in separate tables, but maintain an inheritance relationship between them using the "id" column that refers to the main table.
+The ````"Students"```` table has additional properties such as "course", while the ````"Teachers"```` table has an additional property called "department". By using inheritance, you can store data specific to each type of person in separate tables, but maintain an inheritance relationship between them using the "id" column that refers to the main table.
 
 ### Data insertion 
 
